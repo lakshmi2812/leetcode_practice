@@ -82,24 +82,25 @@ public class LinkedList{
     }
 
     //insertNth -> insert an element at the index n
-    public void insertNth(ListNode head, int index, int data){
-        if(head == null){
-            head = new ListNode(data);
-        }
-        if(index < 0 || index > this.listLength(head)){
+    public void insertNth(int index, int data){
+        //Case - the list is empty
+        if(this.head == null){
+            this.head = new ListNode(data);
             return;
         }
-        ListNode dummyNode = new ListNode(-1);
-        //insert the element at head
+        //Case - Given index is invalid
+        if(index < 0 || index > this.listLength(this.head)){
+            return;
+        }
+        //Case - insert the element at head
         if(index == 0){
             ListNode newNode = new ListNode(data);
-            dummyNode.next = newNode;
-            newNode.next = head;
-            head = newNode;
-            dummyNode.next = null;
+            newNode.next = this.head;
+            this.head = newNode;
+            return;
         }
         int count = 0;
-        ListNode current = head;
+        ListNode current = this.head;
         while(count < index-1){
             current = current.next;
             count++;
@@ -141,7 +142,15 @@ public class LinkedList{
         int[] arr = {10,20,30};
         LinkedList ll = new LinkedList(arr);
         ll.printList();
-        ll.insertNth(ll.head, 1, 50);
+        /* Testing INSERT function */
+        //Insert in the middle of the list
+        ll.insertNth(1, 50);
+        ll.printList();
+        //Insert at the end of the list
+        ll.insertNth(4, 100);
+        ll.printList();
+        //Insert at the head
+        ll.insertNth(0, 5000);
         ll.printList();
         System.out.println("Finding 50: "+ll.find(50));
         System.out.println("Finding 30: "+ll.find(30));
@@ -151,14 +160,13 @@ public class LinkedList{
         System.out.println("After removing 20:");
         ll.printList();
         //Remove head element
-        ll.remove(10);
-        System.out.println("After removing 10:");
+        ll.remove(5000);
+        System.out.println("After removing 5000:");
         ll.printList();
         //Remove last element
-        ll.remove(30);
-        System.out.println("After removing 30:");
+        ll.remove(100);
+        System.out.println("After removing 100:");
         ll.printList();
-        int[] arr2 = {1};
     }
 
 }
