@@ -152,8 +152,13 @@ public class LinkedList{
         //Insert at the head
         ll.insertNth(0, 5000);
         ll.printList();
-        System.out.println("Finding 50: "+ll.find(50));
+        /* Testing INSERT function */
+        //Finding middle element 
         System.out.println("Finding 30: "+ll.find(30));
+        //Finding head element
+        System.out.println("Finding 5000: "+ll.find(5000));
+        //Finding last element
+        System.out.println("Finding 100: "+ll.find(100));
         /*Testing Remove function*/
         //Remove middle element
         ll.remove(20);
