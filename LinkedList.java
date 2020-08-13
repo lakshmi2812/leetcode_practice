@@ -137,6 +137,24 @@ public class LinkedList{
         }
     }
 
+    //STANFORD CS LIBRARY PRACTICE
+    public int count(int data){
+        if(this.head == null){
+            return 0;
+        }
+
+        int numCount = 0;
+
+        ListNode current = this.head;
+        while(current != null){
+            if(current.data == data){
+                numCount++;
+            }
+            current = current.next;
+        }
+        return numCount;
+    }
+
     //TEST
     public static void main(String[] args){
         int[] arr = {10,20,30};
@@ -172,6 +190,18 @@ public class LinkedList{
         ll.remove(100);
         System.out.println("After removing 100:");
         ll.printList();
+        /* Testing count function */
+        //Element 1 is not present in the list
+        System.out.println("No. of. times 1 appears in the list: "+ll.count(1));
+        //Element 1 appears multiple times
+        int[] arrCount = {1,2,3,4,1,5,6,1};
+        LinkedList llCount = new LinkedList(arrCount);
+        llCount.printList();
+        System.out.println("No. of. times 1 appears in the list: "+llCount.count(1));
+        //Element 1 appears only once in the list
+        int[] arrCount1 = {1,2,3,4,5,6};
+        LinkedList llCount1 = new LinkedList(arrCount1);
+        llCount1.printList();
+        System.out.println("No. of. times 1 appears in the list: "+llCount1.count(1));
     }
-
 }
