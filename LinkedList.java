@@ -137,7 +137,12 @@ public class LinkedList{
         }
     }
 
+    /* **************************** */
     //STANFORD CS LIBRARY PRACTICE
+    
+    //Assume that the list nodes contain only positive integers as data
+
+    //1. count - takes an integer data and returns the number of times that data appears in the list
     public int count(int data){
         if(this.head == null){
             return 0;
@@ -154,6 +159,160 @@ public class LinkedList{
         }
         return numCount;
     }
+
+    //2. getNth - takes an integer index and returns the data at that index(Note that index is zero-based)
+    public int getNth(int index){
+        if(index < 0  || index > this.listLength(this.head)-1){
+            //-1 indicates invalid index
+            return -1;
+        }
+
+        if(this.head == null){
+            return -1;
+        }
+
+        int _count = 0;
+        ListNode current = this.head;
+        while(current.next != null && _count < index){
+            _count++;
+            current = current.next;
+        }
+        return current.data;
+
+    }
+
+    //3. deleteList -> deletes the current list
+    public void deleteList(){
+        this.head = null;
+    }
+
+    //4. pop -> deletes the head node and returns the data of the head node
+    public int pop(){
+        if(this.head == null){
+            //Let -1 denote that the list is empty
+            return -1;
+        }
+        ListNode current = this.head;
+        this.head = this.head.next;
+        return current.data;
+    }
+
+    //5.insertNth - already coded above and tested
+
+    //6. sortedInsert - given a sorted list and a new node, insert the new node in the correct position in the list
+    //Example list : [23,45,79,100,900,1000]
+    public void sortedInsert(ListNode head, ListNode newNode){
+        int data = newNode.data;
+        if(head == null){
+            head = newNode;
+        }
+        ListNode current = this.head;
+        //newNode data is less than that of the head node
+        if(data < current.data){
+            newNode.next = current;
+            head = newNode;
+        }
+        while(current.next!= null){
+            if(data > current.data && data < current.next.data){
+                ListNode tempNode = current.next;
+                current.next = newNode;
+                newNode.next = tempNode;
+            }
+            current = current.next;
+        }
+        //newNode data is greater than the node having largest data value in the list
+        if(data > current.data){
+            current.next = newNode;
+        }
+    }
+
+    //7. insertSort -> sort the given list
+    public void insertSort(){
+        //If the list is empty or has only one element, there is nothing to be done
+        if(this.head == null || this.head.next == null){
+            return;
+        }
+
+        ListNode current = this.head;
+        LinkedList ll_unsorted = new LinkedList(current.next);
+        ListNode current_unsorted = ll_unsorted.head;
+        while(current_unsorted.next != null){
+            sortedInsert(this.head, current_unsorted);
+            current_unsorted = current_unsorted.next;
+        }
+
+        sortedInsert(this.head, current_unsorted);
+
+    }
+
+    //8. append -> given 2 lists, append one list at the end of the other
+    public ListNode append(LinkedList ll1, LinkedList ll2){
+        if(ll1.head == null){
+            return ll2.head;
+        }
+
+        if(ll2.head == null){
+            return ll1.head;
+        }
+
+        ListNode current = ll1.head;
+        //Traverse to the end of ll1
+        while(current.next != null){
+            current = current.next;
+        }
+
+        current.next = ll2.head;
+        ll2.head.next = null;
+
+        return ll1.head;
+    }
+
+    //9. FrontBackSplit -> split a list into 2 lists(front and back). If the list length is odd, the extra element should be in the front list
+    public void FrontBackSplit(){
+        if(this.head == null){
+            System.out.println("The list is empty!");
+            return;
+        }
+        LinkedList front = new LinkedList();
+        LinkedList back = new LinkedList();
+        int listLength = this.listLength(this.head);
+        if(listLength < 2){
+            front.head = this.head;
+            front.printList();
+            back.printList();
+            return;
+        }
+
+        int splitPoint;
+        if(listLength % 2 == 0){
+            splitPoint = (int)((listLength/2)-1);
+        }else{
+            splitPoint = (int)Math.floor(listLength/2);
+        }
+
+        int count = 0;
+        ListNode current = this.head;
+        ListNode frontCurrent = front.head;
+        while(count < splitPoint){
+            frontCurrent.next = current.next;
+            current = current.next;
+            frontCurrent = frontCurrent.next;
+            count++;
+        }
+        back.head = current.next;
+        ListNode backCurrent = back.head;
+        while(current.next != null){
+            backCurrent.next = current.next;
+            backCurrent = backCurrent.next;
+            current = current.next;
+        }
+        backCurrent.next = current.next;
+
+        front.printList();
+        back.printList();
+    }
+
+
 
     //TEST
     public static void main(String[] args){
