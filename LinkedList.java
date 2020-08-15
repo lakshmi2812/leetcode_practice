@@ -312,6 +312,63 @@ public class LinkedList{
         back.printList();
     }
 
+    //10. removeDuplicates -> Given a list sorted in increasing order, remove duplicates from the list
+    public void removeDuplicates(){
+        //if the list is empty or has only one node, do nothing
+        if(this.head == null || this.head.next == null){
+            return;
+        }
+
+        ListNode current = this.head;
+        while(current.next != null){
+            if(current.data == current.next.data){
+                current.next = current.next.next;
+            }else{
+                current = current.next;
+            }
+        }
+    }
+
+    //11. moveNode -> given two lists, dest and source, remove the front(head) node from the source list and push it 
+    //to the front(head) of the dest list
+    public void moveNode(LinkedList dest, LinkedList source){
+        ListNode current = source.head;
+        source.head = current.next;
+        current.next = null;
+        if(dest.head == null){
+            dest.head = current;
+        }
+
+        current.next = dest.head;
+        dest.head = current;
+    }
+
+    //12. alternatingSplit -> given a list, make two lists from this list using alternating elements
+    public void alternatingSplit(){
+        if(this.head == null || this.head.next == null){
+            System.out.println("The list has less than 2 elements. It cannot be split!");
+            return;
+        }
+
+        int count = 0;
+        ListNode current = this.head;
+        ListNode currentOdd;
+        int listLength = this.listLength(this.head);
+        LinkedList list1 = new LinkedList();
+        LinkedList list2;
+        while(count < listLength){
+            if(count % 2 == 0){
+                currentOdd = current.next;
+                current.next = current.next.next;
+                currentOdd.next = null;
+                list2 = new LinkedList(currentOdd);
+                moveNode(list1, list2);
+            }
+            count++;
+        }
+    }
+
+
 
 
     //TEST
