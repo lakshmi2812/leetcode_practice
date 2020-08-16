@@ -393,7 +393,7 @@ public class LinkedList{
         ListNode current2 = list2.head;
         LinkedList listMerged = new LinkedList();
         ListNode currentMerged = listMerged.head;
-        while(current1.next != null && current2.next != null){
+        while(current1.next != null || current2.next != null){
             currentMerged = new ListNode(current1.data);
             current1 = current1.next;
             currentMerged = currentMerged.next;
@@ -431,7 +431,7 @@ public class LinkedList{
         LinkedList sortedList = new LinkedList();
         ListNode sortedCurrent = sortedList.head;
 
-        while(current1.next != null && current2.next != null){
+        while(current1.next != null || current2.next != null){
             if(current1.data < current2.data){
                 sortedCurrent = new ListNode(current1.data);
                 current1 = current1.next;
@@ -477,7 +477,27 @@ public class LinkedList{
 
     //16. sortedIntersect -> given two lists sorted in increasing order, return a new list which is an intersection of these two lists
     public LinkedList sortedIntersect(LinkedList list1, LinkedList list2){
-        return null;
+        if(list1 == null || list2 == null){
+            return null;
+        }
+
+        LinkedList intersectList = new LinkedList();
+        ListNode current = intersectList.head;
+        ListNode current1 = list1.head;
+        ListNode current2 = list2.head;
+
+        while(current1.next != null || current2.next != null){
+            if(current1.data < current2.data){
+                current1 = current1.next;
+            }else if(current1.data < current2.data){
+                current2 = current2.next;
+            }else{
+                current = new ListNode(current1.data);
+                current = current.next;
+            }
+        }
+
+        return intersectList;
     }
 
 
