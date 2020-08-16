@@ -268,13 +268,12 @@ public class LinkedList{
     }
 
     //9. FrontBackSplit -> split a list into 2 lists(front and back). If the list length is odd, the extra element should be in the front list
-    public void FrontBackSplit(){
+    public void frontBackSplit(LinkedList front, LinkedList back){
         if(this.head == null){
             System.out.println("The list is empty!");
             return;
         }
-        LinkedList front = new LinkedList();
-        LinkedList back = new LinkedList();
+        
         int listLength = this.listLength(this.head);
         if(listLength < 2){
             front.head = this.head;
@@ -457,6 +456,29 @@ public class LinkedList{
         return sortedList;
     }
 
+    //15. mergeSort -> given an unordered list, sort the list using the classic merge sort algorithm
+    public LinkedList mergeSort(LinkedList list){
+        int listLength = list.listLength(list.head);
+        //Base case - if the length of the list is less than or equal to one, do nothing
+        if(listLength <= 1){
+            return list;
+        }
+
+        LinkedList front = new LinkedList();
+        LinkedList back = new LinkedList();
+
+        //split the list into two lists using the frontBackSplit function
+        this.frontBackSplit(front, back);
+
+        //recursively sort each half
+        return sortedMerge(mergeSort(front), mergeSort(back));
+
+    }
+
+    //16. sortedIntersect -> given two lists sorted in increasing order, return a new list which is an intersection of these two lists
+    public LinkedList sortedIntersect(LinkedList list1, LinkedList list2){
+        return null;
+    }
 
 
     //TEST
