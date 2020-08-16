@@ -368,6 +368,94 @@ public class LinkedList{
         }
     }
 
+    //Helper function addToEnd for shuffleMerge -> adds a node to the end of the list
+    public void addToEnd(int data, ListNode head){
+        if(head == null){
+            head = new ListNode(data);
+        }
+
+        ListNode current = head;
+        while(current.next != null){
+            current = current.next;
+        }
+
+        current.next = new ListNode(data);
+    }
+
+    //13. shuffleMerge -> given two lists, form a new list by taking alternating nodes from each list
+    public LinkedList shuffleMerge(LinkedList list1, LinkedList list2){
+        if(list1.head == null){
+            return list2;
+        }
+        if(list2.head == null){
+            return list1;
+        }
+        ListNode current1 = list1.head;
+        ListNode current2 = list2.head;
+        LinkedList listMerged = new LinkedList();
+        ListNode currentMerged = listMerged.head;
+        while(current1.next != null && current2.next != null){
+            currentMerged = new ListNode(current1.data);
+            current1 = current1.next;
+            currentMerged = currentMerged.next;
+            currentMerged = new ListNode(current2.data);
+            currentMerged = currentMerged.next;
+            current2 = current2.next;
+        }
+
+        while(current1.next != null){
+            currentMerged.next = new ListNode(current1.data);
+            current1 = current1.next;
+            currentMerged = currentMerged.next;
+        }
+
+        while(current2.next != null){
+            currentMerged.next = new ListNode(current2.data);
+            current2 = current2.next;
+            currentMerged = currentMerged.next;
+        }
+
+        return listMerged;
+    }
+
+    //14. sortedMerge -> given two lists sorted in increasing order, merge them to form a new list sorted in increasing order
+    public LinkedList sortedMerge(LinkedList list1, LinkedList list2){
+        if(list1.head == null){
+            return list2;
+        }
+        if(list2.head == null){
+            return list1;
+        }
+
+        ListNode current1 = list1.head;
+        ListNode current2 = list2.head;
+        LinkedList sortedList = new LinkedList();
+        ListNode sortedCurrent = sortedList.head;
+
+        while(current1.next != null && current2.next != null){
+            if(current1.data < current2.data){
+                sortedCurrent = new ListNode(current1.data);
+                current1 = current1.next;
+            }else{
+                sortedCurrent = new ListNode(current2.data);
+                current2 = current2.next;
+            }
+            sortedCurrent = sortedCurrent.next;
+        }
+
+        while(current1.next != null){
+            sortedCurrent.next = new ListNode(current1.data);
+            current1 = current1.next;
+            sortedCurrent = sortedCurrent.next;
+        }
+        while(current2.next != null){
+            sortedCurrent.next = new ListNode(current2.data);
+            current2 = current2.next;
+            sortedCurrent = sortedCurrent.next;
+        }
+
+        return sortedList;
+    }
 
 
 
