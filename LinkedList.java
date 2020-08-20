@@ -500,6 +500,34 @@ public class LinkedList{
         return intersectList;
     }
 
+    //17. reverse -> given a list, reverse the order of nodes appearing in the list
+    public LinkedList reverse(ListNode head){
+        if(head == null || head.next == null){
+            return new LinkedList(head);
+        }
+
+        ListNode dummyNode = new ListNode(-1);
+        LinkedList reverseList = new LinkedList(dummyNode);
+        ListNode currentR = head;
+        ListNode current = head.next;
+        ListNode currentNew = dummyNode.next;
+        while(current != null){
+            head = head.next;
+            currentR.next = null;
+            dummyNode.next = currentR;
+            currentR.next = currentNew;
+            currentNew = dummyNode.next;
+            currentR = current;
+            current = current.next;
+        }
+
+        dummyNode.next = currentR;
+        currentR.next = currentNew;
+        currentNew = dummyNode.next;
+        reverseList.head = reverseList.head.next;
+        return reverseList;
+    }
+
 
     //TEST
     public static void main(String[] args){
@@ -549,5 +577,22 @@ public class LinkedList{
         LinkedList llCount1 = new LinkedList(arrCount1);
         llCount1.printList();
         System.out.println("No. of. times 1 appears in the list: "+llCount1.count(1));
+        /* Testing  reverse function */
+        System.out.println("*** Testing reverse function ***");
+        //List is null
+        LinkedList empty = new LinkedList();
+        LinkedList emptyReverse = empty.reverse(empty.head);
+        emptyReverse.printList();
+        //List contains only one element
+        ListNode oneHead = new ListNode(100);
+        LinkedList oneElement = new LinkedList(oneHead);
+        LinkedList oneElementReverse = oneElement.reverse(oneElement.head);
+        oneElementReverse.printList();
+        //List contains more than one element
+        int[] reverseArr = {1,2,3,4};
+        LinkedList listToBeReversed = new LinkedList(reverseArr);
+        listToBeReversed.printList();
+        LinkedList reversedList = listToBeReversed.reverse(listToBeReversed.head);
+        reversedList.printList();
     }
 }
