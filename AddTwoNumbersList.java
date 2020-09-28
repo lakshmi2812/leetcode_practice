@@ -102,10 +102,13 @@ class AddTwoNumbersList {
         ListNode outputListNode = addTwoNumbers(ll1.head, ll2.head);
         System.out.println(outputListNode.val);
         ListNode current = outputListNode;
+        //This code is probably not working correctly!
         while(current != null){
+            System.out.println("Current value:");
             System.out.println(current.val);
             current = current.next;
         }
+
     }
 
 }
