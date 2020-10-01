@@ -100,7 +100,7 @@ class AddTwoNumbersList {
         LinkedList ll1 = new LinkedList(arr1);
         LinkedList ll2 = new LinkedList(arr2);
         ListNode outputListNode = addTwoNumbers(ll1.head, ll2.head);
-        System.out.println(outputListNode.val);
+        //System.out.println(outputListNode.val);
         ListNode current = outputListNode;
         //This code is probably not working correctly!
         while(current != null){
@@ -108,7 +108,6 @@ class AddTwoNumbersList {
             System.out.println(current.val);
             current = current.next;
         }
-
     }
 
 }
