@@ -39,20 +39,17 @@ public class RemoveDuplicates {
         if(head == null || head.next == null){
             return head;
         }
-        
         ListNode current = head;
-        ListNode dummyHead = new ListNode(-1);
-        ListNode newCurrent = dummyHead;
-        while(current.next != null){
-            newCurrent.next = new ListNode(current.val);
+        //we use (current.next != null) condition to avoid null pointer exception
+        //while checking current.next.val
+        while(current != null && current.next != null){
             if(current.val == current.next.val){
                 current.next = current.next.next;
             }else{
                 current = current.next;
             }
-            newCurrent = newCurrent.next;
         }
-        return dummyHead.next;
+        return head;
     }
 
     public static void main(String[] args){
