@@ -49,12 +49,13 @@ public class PartitionList {
             }
             current = current.next;
         }
-        currentGreater = dummyHeadGreater;
-        while(currentGreater.next != null){
-            currentSmaller.next = currentGreater.next;
-            currentSmaller = currentSmaller.next;
-            currentGreater = currentGreater.next;
-        }
+        ListNode currentNewGreater = dummyHeadGreater;
+        currentSmaller.next = dummyHeadGreater.next;
+        // while(currentNewGreater.next != null){
+        //     currentSmaller.next = currentNewGreater.next;
+        //     currentSmaller = currentSmaller.next;
+        //     currentNewGreater = currentNewGreater.next;
+        // }
         return dummyHeadSmaller.next;
     }
 }
